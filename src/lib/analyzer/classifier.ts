@@ -130,14 +130,19 @@ export async function classifyTask(
   apiConfig: ClassifierApiConfig = {},
   mode: ClassifierMode = "classifier"
 ): Promise<ClassifierResult> {
+  let jevFailure: string | undefined;
   // Jev is opt-in: only tried when selected and the server key is set.
   if (mode === "jev" && process.env.TYPESAFE_API_KEY?.trim()) {
     const jevResult = await classifyTaskWithJev(taskText, context);
     if (jevResult.ok) {
       return { profile: jevResult.profile, source: "jev", classifierConfidence: jevResult.confidence };
     }
-    console.warn("Jev classification failed, falling back:", jevResult.fallbackReason);
+    jevFailure = jevResult.fallbackReason;
+    console.warn("Jev classification failed, falling back:", jevFailure);
+  } else if (mode === "jev") {
+    jevFailure = "TYPESAFE_API_KEY is not configured on the server.";
   }
+  const withJevNote = (reason: string) => (jevFailure ? `Jev unavailable (${jevFailure}) ${reason}` : reason);
 
   const endpoint = resolveEndpoint(apiConfig);
 
@@ -145,7 +150,7 @@ export async function classifyTask(
     return {
       profile: classifyTaskDeterministic(taskText, context),
       source: "fallback",
-      fallbackReason: endpoint.reason,
+      fallbackReason: withJevNote(endpoint.reason),
     };
   }
 
@@ -217,6 +222,6 @@ Analyze the task and return ONLY the JSON object.`;
   return {
     profile: classifyTaskDeterministic(taskText, context),
     source: "fallback",
-    fallbackReason: failure,
+    fallbackReason: withJevNote(failure),
   };
 }
