@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Tailwind v4 defaults dark: to the OS setting; the app toggles a .dark class instead. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-primary: #08090d;
+    --bg-secondary: #0e1118;
+    --bg-card: #121620;
+    --bg-card-hover: #161b27;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-subtle-hover: rgba(255, 255, 255, 0.16);
+    --border-focus: #3b82f6;
+    --text-primary: #f3f4f6;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-blue: #3b82f6;
+    --accent-emerald: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-purple: #8b5cf6;
+    --accent-cyan: #06b6d4;
+  }
+
+  .light {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f8fafc;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-subtle-hover: rgba(0, 0, 0, 0.16);
+    --border-focus: #2563eb;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --accent-blue: #2563eb;
+    --accent-emerald: #059669;
+    --accent-amber: #d97706;
+    --accent-purple: #7c3aed;
+    --accent-cyan: #0891b2;
+  }
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.012em;
+}
+
+/* Subtle architectural dot grid */
+.canvas-grid {
+  background-size: 32px 32px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+.light .canvas-grid {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
