@@ -1,0 +1,17 @@
+# Model-Pilot
+
+> ModelPilot answers one question: given this software task, what is the cheapest AI configuration likely to complete it reliably? It scores a task on 8 dimensions (complexity, ambiguity, consequence, novelty, context demand, scope, tool demand, verifiability) and recommends a model, a reasoning effort level and an execution strategy. Live at https://model-pilot-ten.vercel.app/. Next.js, TypeScript.
+
+## Docs
+
+- [README.md](https://github.com/puIad/Model-Pilot/blob/master/README.md): features and how the recommendation works
+- [AGENTS.md](https://github.com/puIad/Model-Pilot/blob/master/AGENTS.md): rules for coding agents
+- [Plan.md](https://github.com/puIad/Model-Pilot/blob/master/Plan.md): plan
+- [REVIEW.md](https://github.com/puIad/Model-Pilot/blob/master/REVIEW.md): review notes
+
+## Source
+
+- [src](https://github.com/puIad/Model-Pilot/tree/master/src): app and scoring engine
+- [test-cases.ts](https://github.com/puIad/Model-Pilot/blob/master/test-cases.ts): test cases
+- [test-calibration.ts](https://github.com/puIad/Model-Pilot/blob/master/test-calibration.ts): calibration tests
+- [test-regressions.ts](https://github.com/puIad/Model-Pilot/blob/master/test-regressions.ts): regression tests
